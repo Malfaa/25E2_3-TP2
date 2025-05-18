@@ -6,7 +6,6 @@ import org.example.exercicios.Exercicio5.Consulta;
 import org.example.exercicios.Exercicio5.VersaoFake;
 import org.example.exercicios.Exercicio6.PlanoSaude;
 import org.example.exercicios.Exercicio7.Auditoria;
-import org.example.exercicios.Exercicio7.AuditoriaSpy;
 import org.example.exercicios.Exercicio8.AutorizadorReembolso;
 import org.example.exercicios.Exercicio9.ConsultaBuilder;
 import org.junit.jupiter.api.Assertions;
@@ -126,13 +125,14 @@ public class MainTestes {
 
     @Test
     public void consulta_verificaConsultaFoiRegistrada_retornaTrue() {
-        AuditoriaSpy auditoria = new AuditoriaSpy();
-        registrarConsulta(consulta, auditoria);
-        assertTrue(auditoria.isConsultaRegistrada());
+        Auditoria auditoriaSpy = Mockito.spy(Auditoria.class);
+        registrarConsulta(consulta, auditoriaSpy);
+        Mockito.verify(auditoriaSpy, Mockito.times(1)).verificarRegitroConsulta(consulta);
+
 
         //Exercicio 9
-        registrarConsulta(novaConsulta, auditoria);
-        assertTrue(auditoria.isConsultaRegistrada());
+        registrarConsulta(novaConsulta, auditoriaSpy);
+        Mockito.verify(auditoriaSpy, Mockito.times(1)).verificarRegitroConsulta(consulta);
     }
 
     //Exercicio 8
