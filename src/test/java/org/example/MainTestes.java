@@ -80,7 +80,6 @@ public class MainTestes {
     @Test
     void consulta_registrarConsultaEBuscarConsulta(){
         VersaoFake vf = new VersaoFake();
-        ConsultaBuilder builder = new ConsultaBuilder();
         vf.registrarConsulta(consulta);
         vf.buscarConsultas(consulta);
 
