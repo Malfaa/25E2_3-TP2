@@ -20,14 +20,17 @@ public class TesteExercicio12 {
     @BeforeEach
     void setup(){
         paciente = new Paciente("Jeferson", 80);
+        //Helper criação de consultas
         consulta = builder.comId(10).comPaciente(paciente).comDataAtual().foiAutorizado(true).build();
     }
 
     @Test
     public void teste_testeGeralTestandoTodosOsComponentes(){
+        //Mock AutorizadorReembolso
         AutorizadorReembolso autorizadorMock = Mockito.mock(AutorizadorReembolso.class);
         Mockito.when(autorizadorMock.autorizarReembolso(consulta)).thenReturn(true);
 
+        //Stub para PlanoSaude
         PlanoSaude plano70 = new PlanoSaude() {
             @Override
             public double percentualDeCobertura() {
